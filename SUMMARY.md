@@ -21,7 +21,13 @@
        * [1.5.4 Executing Filters 执行筛选操作](s01/05_04_executing_filters.md)
        * [1.5.5 Executing Aggregations 执行聚合操作](s01/05_05_executing_aggregations.md)
    * [1.6 Conclusion 本章结语](s01/06_conclusion.md)
-* [Setup](s02/00_setup.md)
+* [2. Setup 安装指南](s02/00_setup.md)
+  * 2.1 Configuration
+  * 2.2 Running as a Service on Linux
+  * 2.3 Running as a Service on Windows
+  * 2.4 Directory Layout
+  * 2.5 Repositories
+  * 2.6 Upgrading
 * Breaking changes
 * API Conventions
 * Document APIs
