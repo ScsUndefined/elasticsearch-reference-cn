@@ -22,7 +22,7 @@
        * [1.5.5 Executing Aggregations 执行聚合操作](s01/05_05_executing_aggregations.md)
    * [1.6 Conclusion 本章结语](s01/06_conclusion.md)
 * [2. Setup 安装指南](s02/00_setup.md)
-   * [2.1 Configuration](s02/01_configuration.md)
+   * [2.1 Configuration 配置](s02/01_configuration.md)
    * 2.2 Running as a Service on Linux
    * 2.3 Running as a Service on Windows
    * 2.4 Directory Layout
