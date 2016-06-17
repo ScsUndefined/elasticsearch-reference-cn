@@ -19,7 +19,7 @@
        * [1.5.2 Introducing the Query Language 查询语法简介](s01/05_02_introducing_the_query_language.md)
        * [1.5.3 Executing Searches 执行查询操作](s01/05_03_executing_searches.md)
        * [1.5.4 Executing Filters 执行筛选操作](s01/05_04_executing_filters.md)
-       * [1.5.5 Executing Aggregations](s01/05_05_executing_aggregations.md)
+       * [1.5.5 Executing Aggregations 执行聚合操作](s01/05_05_executing_aggregations.md)
    * Conclusion
 * Setup
 * Breaking changes
