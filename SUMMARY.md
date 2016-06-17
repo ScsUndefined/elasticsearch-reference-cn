@@ -17,7 +17,7 @@
    * [1.5 Exploring Your Data 操作数据](s01/05_exploring_your_data.md)
        * [1.5.1 The Search API 查询 API](s01/05_01_the_search_api.md)
        * [1.5.2 Introducing the Query Language 查询语法](s01/05_02_introducing_the_query_language.md)
-       * 1.5.3 Executing Searches
+       * [1.5.3 Executing Searches](s01/05_03_executing_searches.md)
        * 1.5.4 Executing Filters
        * 1.5.5 Executing Aggregations
    * Conclusion
