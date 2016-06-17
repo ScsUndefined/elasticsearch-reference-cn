@@ -113,7 +113,7 @@ curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
 
 我们可以任意地把`must`,`should`和`must_not`查询混合在一个`bool`查询中。甚至，我们可以在`bool`查询中再嵌入另一个`bool`查询来构建复杂的多层级的布尔逻辑。
 
-下面这个示例查询出了所有不住在一个叫做 ID （什么鬼）的地方的 40 岁中年人：
+下面这个示例查询出了所有不住在一个叫做 ID （美国爱达荷州 Idaho）的 40 岁中年人：
 
 ```bash
 curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
