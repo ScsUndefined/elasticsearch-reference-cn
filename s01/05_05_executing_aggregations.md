@@ -74,10 +74,11 @@ And the response (partially shown):
 
 We can see that there are 21 accounts in AL(abama), followed by 17 accounts in TX, followed by 15 accounts in ID(aho), and so forth.
 
-Note that we set size=0 to not show search hits because we only want to see the aggregation results in the response.
+Note that we set `size=0` to not show search hits because we only want to see the aggregation results in the response.
 
 Building on the previous aggregation, this example calculates the average account balance by state (again only for the top 10 states sorted by count in descending order):
 
+```bash
 curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
 {
   "size": 0,
@@ -96,10 +97,13 @@ curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
     }
   }
 }'
-Notice how we nested the average_balance aggregation inside the group_by_state aggregation. This is a common pattern for all the aggregations. You can nest aggregations inside aggregations arbitrarily to extract pivoted summarizations that you require from your data.
+```
+
+Notice how we nested the `average_balance` aggregation inside the `group_by_state` aggregation. This is a common pattern for all the aggregations. You can nest aggregations inside aggregations arbitrarily to extract pivoted summarizations that you require from your data.
 
 Building on the previous aggregation, let’s now sort on the average balance in descending order:
 
+```bash
 curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
 {
   "size": 0,
@@ -121,8 +125,11 @@ curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
     }
   }
 }'
+```
+
 This example demonstrates how we can group by age brackets (ages 20-29, 30-39, and 40-49), then by gender, and then finally get the average account balance, per age bracket, per gender:
 
+```bash
 curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
 {
   "size": 0,
@@ -162,4 +169,6 @@ curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
     }
   }
 }'
-There are a many other aggregations capabilities that we won’t go into detail here. The aggregations reference guide is a great starting point if you want to do further experimentation.
+```
+
+There are a many other aggregations capabilities that we won’t go into detail here. The [aggregations reference guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html) is a great starting point if you want to do further experimentation.
