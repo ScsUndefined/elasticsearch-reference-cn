@@ -20,7 +20,7 @@
        * [1.5.3 Executing Searches 执行查询操作](s01/05_03_executing_searches.md)
        * [1.5.4 Executing Filters 执行筛选操作](s01/05_04_executing_filters.md)
        * [1.5.5 Executing Aggregations 执行聚合操作](s01/05_05_executing_aggregations.md)
-   * Conclusion
+   * [Conclusion](s01/06_conclusion.md)
 * Setup
 * Breaking changes
 * API Conventions
