@@ -21,7 +21,7 @@
        * [1.5.4 Executing Filters 执行筛选操作](s01/05_04_executing_filters.md)
        * [1.5.5 Executing Aggregations 执行聚合操作](s01/05_05_executing_aggregations.md)
    * [1.6 Conclusion](s01/06_conclusion.md)
-* Setup
+* [Setup](s02/00_setup.md)
 * Breaking changes
 * API Conventions
 * Document APIs
