@@ -30,7 +30,7 @@
    * 2.6 Upgrading
 * [Breaking changes](s03/00_breaking_changes.md)
 * [API Conventions](s04/00_api_conventions.md)
-* Document APIs
+* [Document APIs](s05/00_document_apis.md)
 * Search APIs
 * Aggregations
 * Indices APIs
