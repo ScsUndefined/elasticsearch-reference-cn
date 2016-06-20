@@ -37,11 +37,11 @@
 * [9. cat APIs](s09/00_cat_apis.md)
 * [10. Cluster APIs](s10/00_cluster_apis.md)
 * [11. Query DSL](s11/00_query_dsl.md)
-* Mapping
-* [Analysis](s13/00_analysis.md)
-* [Modules](s14/00_modules.md)
-* [Index Modules](s15/00_index_modules.md)
-* [Testing](s16/00_testing.md)
-* [Glossary of terms](s17/00_glossary_of_terms.md)
-* [Release Notes](s18/00_release_notes.md)
+* [12. Mapping](s12/00_mapping.md)
+* [13. Analysis](s13/00_analysis.md)
+* [14. Modules](s14/00_modules.md)
+* [15. Index Modules](s15/00_index_modules.md)
+* [16. Testing](s16/00_testing.md)
+* [17. Glossary of terms](s17/00_glossary_of_terms.md)
+* [18. Release Notes](s18/00_release_notes.md)
 
