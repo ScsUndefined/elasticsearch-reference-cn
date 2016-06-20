@@ -42,6 +42,6 @@
 * [Modules](s14/00_modules.md)
 * [Index Modules](s15/00_index_modules.md)
 * [Testing](s16/00_testing.md)
-* Glossary of terms
+* [Glossary of terms](s17/00_glossary_of_terms.md)
 * Release Notes
 
