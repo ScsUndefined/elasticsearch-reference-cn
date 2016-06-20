@@ -32,7 +32,7 @@
 * [API Conventions](s04/00_api_conventions.md)
 * [Document APIs](s05/00_document_apis.md)
 * [Search APIs](s06/00_search_apis.md)
-* Aggregations
+* [Aggregations](s07/00_aggregations.md)
 * Indices APIs
 * cat APIs
 * Cluster APIs
