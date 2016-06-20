@@ -23,7 +23,7 @@
    * [1.6 Conclusion 本章结语](s01/06_conclusion.md)
 * [2. Setup 安装指南](s02/00_setup.md)
    * [2.1 Configuration 配置](s02/01_configuration.md)
-   * 2.2 Running as a Service on Linux
+   * [2.2 Running as a Service on Linux](s02/02_running_as_a_service_on_linux.md)
    * 2.3 Running as a Service on Windows
    * 2.4 Directory Layout
    * 2.5 Repositories
