@@ -34,8 +34,8 @@
 * [6. Search APIs](s06/00_search_apis.md)
 * [7. Aggregations](s07/00_aggregations.md)
 * [8. Indices APIs](s08/00_indices_apis.md)
-* cat APIs
-* Cluster APIs
+* [9. cat APIs](s09/00_cat_apis.md)
+* [10. Cluster APIs](s10/00_cluster_apis.md)
 * Query DSL
 * Mapping
 * Analysis
