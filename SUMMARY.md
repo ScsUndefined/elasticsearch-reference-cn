@@ -28,11 +28,11 @@
    * 2.4 Directory Layout
    * 2.5 Repositories
    * 2.6 Upgrading
-* [Breaking changes](s03/00_breaking_changes.md)
-* [API Conventions](s04/00_api_conventions.md)
-* [Document APIs](s05/00_document_apis.md)
-* [Search APIs](s06/00_search_apis.md)
-* Aggregations
+* [3. Breaking changes](s03/00_breaking_changes.md)
+* [4. API Conventions](s04/00_api_conventions.md)
+* [5. Document APIs](s05/00_document_apis.md)
+* [6. Search APIs](s06/00_search_apis.md)
+* [7. Aggregations](s07/00_aggregations.md)
 * Indices APIs
 * cat APIs
 * Cluster APIs
