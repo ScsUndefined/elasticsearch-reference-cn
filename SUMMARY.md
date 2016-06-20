@@ -39,7 +39,7 @@
 * [11. Query DSL](s11/00_query_dsl.md)
 * Mapping
 * [Analysis](s13/00_analysis.md)
-* Modules
+* [Modules](s14/00_modules.md)
 * Index Modules
 * Testing
 * Glossary of terms
