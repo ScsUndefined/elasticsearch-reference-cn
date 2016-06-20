@@ -217,15 +217,17 @@ Elasticsearch 使用一个基于 [log4j](https://www.gitbook.com/book/scsundefin
 
 其他的 appender 和日志级别在 [log4j-extras](https://www.gitbook.com/book/scsundefined/elasticsearch-reference-cn/edit#) 中都有，都是拆箱即用的。
 
-### Deprecation logging
+### 弃用日志记录
 
-In addition to regular logging, Elasticsearch allows you to enable logging of deprecated actions. For example this allows you to determine early, if you need to migrate certain functionality in the future. By default, deprecation logging is disabled. You can enable it in the `config/logging.yml` file by setting the deprecation log level to `DEBUG`.
+~~~这段没看懂，直译了一下~~~
+
+除了常规的日志，Elasticsearch 还允许你打开“弃用动作”的日志。这个功能有助于你，比如说，提前让你能够确定你在将来是否需要对核心功能进行迁移。默认情况下，“弃用日志记录”是被禁用的，你可以在 `config/logging.yml` 文件中把 deprecation log 级别设置成 `DEBUG` 来启用它。
 
 ```bash
 deprecation: DEBUG, deprecation_log_file
 ```
 
-This will create a daily rolling deprecation log file in your log directory. Check this file regularly, especially when you intend to upgrade to a new major version.
+这将会在你的日志目录下每天都创建一个滚动“弃用日志”。记得定期查验这个文件，尤其是当你想要更新主版本的时候。
 
 ***
 
