@@ -36,7 +36,7 @@
 * [8. Indices APIs](s08/00_indices_apis.md)
 * [9. cat APIs](s09/00_cat_apis.md)
 * [10. Cluster APIs](s10/00_cluster_apis.md)
-* [Query DSL](s11/00_query_dsl.md)
+* [11. Query DSL](s11/00_query_dsl.md)
 * Mapping
 * Analysis
 * Modules
