@@ -38,7 +38,7 @@
 * [10. Cluster APIs](s10/00_cluster_apis.md)
 * [11. Query DSL](s11/00_query_dsl.md)
 * Mapping
-* Analysis
+* [Analysis](s13/00_analysis.md)
 * Modules
 * Index Modules
 * Testing
