@@ -24,7 +24,7 @@
 * [2. Setup 安装指南](s02/00_setup.md)
    * [2.1 Configuration 配置](s02/01_configuration.md)
    * [2.2 Running as a Service on Linux](s02/02_running_as_a_service_on_linux.md)
-   * 2.3 Running as a Service on Windows
+   * [2.3 Running as a Service on Windows](s02/03_running_as_a_service_on_windows.md)
    * 2.4 Directory Layout
    * 2.5 Repositories
    * 2.6 Upgrading
