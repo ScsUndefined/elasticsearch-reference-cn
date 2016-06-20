@@ -202,17 +202,16 @@ index :
     refresh_interval: 5s
 ```
 
-
-
-This means that every index that gets created on the specific node started with the mentioned configuration will use a refresh interval of 5 seconds `unless the index explicitly sets it`. In other words, any index level settings override what is set in the node configuration. Of course, the above can also be set as a "collapsed" setting, for example:
+这段配置信息的意思是这个指定节点的上的所有索引都会按照上面这个配置来启动，即都会 5 秒刷新一次，除非索引**被额外显式地设置**了其他的刷新间隔时间。换句话说，任何索引级别的配置操作都可以覆盖节点级别的配置。当然上面这个配置项同样也可以被映射成一个`es.`开头的配置项：
 
 ```bash
 $ elasticsearch -Des.index.refresh_interval=5s
 ```
 
-All of the index level configuration can be found within each [index module](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html).
+所有的索引级配置项都可以在 [index module](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html) 被查阅到。
 
-## Logging
+## 日志配置
+
 
 Elasticsearch uses an internal logging abstraction and comes, out of the box, with [log4j](http://logging.apache.org/log4j/1.2/). It tries to simplify log4j configuration by using [YAML](http://www.yaml.org/) to configure it, and the logging configuration file is `config/logging.yml`. The [JSON](http://en.wikipedia.org/wiki/JSON) and [properties](http://en.wikipedia.org/wiki/.properties) formats are also supported. Multiple configuration files can be loaded, in which case they will get merged, as long as they start with the `logging.` prefix and end with one of the supported suffixes (either `.yml`, `.yaml`, `.json` or `.properties`). The logger section contains the java packages and their corresponding log level, where it is possible to omit the `org.elasticsearch` prefix. The appender section contains the destinations for the logs. Extensive information on how to customize logging and all the supported appenders can be found on the [log4j documentation](http://logging.apache.org/log4j/1.2/manual.html).
 
