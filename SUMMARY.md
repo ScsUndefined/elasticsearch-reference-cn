@@ -40,7 +40,7 @@
 * Mapping
 * [Analysis](s13/00_analysis.md)
 * [Modules](s14/00_modules.md)
-* Index Modules
+* [Index Modules](s15/00_index_modules.md)
 * Testing
 * Glossary of terms
 * Release Notes
