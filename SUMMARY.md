@@ -28,7 +28,7 @@
    * 2.4 Directory Layout
    * 2.5 Repositories
    * 2.6 Upgrading
-* Breaking changes
+* [Breaking changes](s03/00_breaking_changes.md)
 * API Conventions
 * Document APIs
 * Search APIs
