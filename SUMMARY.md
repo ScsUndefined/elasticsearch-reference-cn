@@ -29,7 +29,7 @@
    * 2.5 Repositories
    * 2.6 Upgrading
 * [Breaking changes](s03/00_breaking_changes.md)
-* API Conventions
+* [API Conventions](s04/00_api_conventions.md)
 * Document APIs
 * Search APIs
 * Aggregations
