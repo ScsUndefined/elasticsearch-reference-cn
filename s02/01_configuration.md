@@ -90,9 +90,9 @@ sysctl -w vm.max_map_count=262144
   
 ## Elasticsearch 配置
 
-**elasticsearch** 的配置文件在 `ES_HOME/config` 文件夹下。这个文件夹里有两个文件，`elasticsearch.yml`，用来配置 Elasticsrearch 的各个[模块](https://www.gitbook.com/book/scsundefined/elasticsearch-reference-cn/edit#)，`logging.yml`，用来配置 Elasticsearch 的日志。
+**elasticsearch** 的配置文件在 `ES_HOME/config` 文件夹下。这个文件夹里有两个文件，`elasticsearch.yml`，用来配置 Elasticsrearch 的各个 [模块](https://www.gitbook.com/book/scsundefined/elasticsearch-reference-cn/edit#)，`logging.yml`，用来配置 Elasticsearch 的日志。
 
-配置的形式是 [YAML](https://www.gitbook.com/book/scsundefined/elasticsearch-reference-cn/edit#)。下面是个简单的小示例，这改变了所有基于网络的模块用来绑定和发布的地址：
+配置信息的书写形式是 [YAML](https://www.gitbook.com/book/scsundefined/elasticsearch-reference-cn/edit#)。下面是个简单的小示例，这改变了所有基于网络的模块用来绑定和发布的地址：
 
 ```bash
 network :
@@ -138,7 +138,7 @@ node:
 
 ### 配置格式
 
-在程序内部，所有的设置都被映射在相应的 `命名空间` 中。比如说上面那个配置项就被映射在 `node.name` 中。这也使得在更换配置格式的时候会非常的方便，比如，如果要以 [JSON](https://www.gitbook.com/book/scsundefined/elasticsearch-reference-cn/edit#) 格式来配置 Elasticsearch 的话，只要把 `elasticsearch.yml` 重命名成 `elasticsearch.json` 然后加上下面这段代码就行了：
+在 elasticsearch 程序内部，各个设置项都被映射在相应的`命名空间`里。比如上面那个节点的配置信息就会被映射在程序内部中一个叫 `node.name` 的设置项中。这个机制使得 elasticsearch 能够很方便地支持其他格式的配置方式。比如，用 JSON 格式的信息来配置 Elasticsearch，只需要简单地把  `elasticsearch.yml` 文件重命名成 `elasticsearch.json` 然后再加上下面这段配置信息就可以了：
 
 ```bash
 {
@@ -148,15 +148,15 @@ node:
 }
 ```
 
-这也同样也方便了在程序外部进行设置，比如使用 `ES_JAVA_OPTS` 环境变量或者通过传参给 `elasticsearch` 命令:
+这个机制同样也方便我们使用 `ES_JAVA_OPTS` 环境变量或者通过传参给  `elasticsearch` 命令来在外部对 elasticsearh 进行配置，就像这样：
 
 ```bash
 $ elasticsearch -Des.network.host=10.0.0.4
 ```
 
-Another option is to set `es.default`. prefix instead of `es.` prefix, which means the default setting will be used only if not explicitly set in the configuration file.
+除了像上面这样在 `-D` 后加上 `es.` 开头的配置信息，你也可以使用 `es.default.` 而不使用 `es.`。这个区别在于 `es.default.` 开头的配置信息只有当相应的配置在配置文件中没有明确设置的时候，才会生效，如果配置文件中有相应的配置，就会优先采用配置文件中的内容。
 
-Another option is to use the `${...}` notation within the configuration file which will resolve to an environment setting, for example:
+你也可以在配置文件中使用`${...}`符号来引用环境变量：
 
 ```bash
 {
@@ -166,26 +166,26 @@ Another option is to use the `${...}` notation within the configuration file whi
 }
 ```
 
-Additionally, for settings that you do not wish to store in the configuration file, you can use the value `${prompt.text}` or `${prompt.secret}` and start Elasticsearch in the foreground. `${prompt.secret}` has echoing disabled so that the value entered will not be shown in your terminal; `${prompt.text}` will allow you to see the value as you type it in. For example:
+另外，假使你不希望把你的配置内容存储在配置文件中，你也可以使用 `${prompt.text}` 或者 `${prompt.secret}` 并把 Elasticsearch 运行在前台。`${prompt.secret}` 已经禁用了 echo，所以它的值是不会在终端中被显示出来的；`${prompt.text}`则允许你看到你键入的值，就像这样：
 
 ```bash
 node:
   name: ${prompt.text}
 ```
 
-On execution of the `elasticsearch` command, you will be prompted to enter the actual value like so:
+当你像上面这样使用 `${prompt.text}` 来执行 `elasticsearch` 命令后，你将会看到类似如下的提示信息，要求你输入实际的节点名：
 
 ```bash
 Enter value for [node.name]:
 ```
 
-> **Note**
+> **注意**
 > 
-> Elasticsearch will not start if `${prompt.text}` or `${prompt.secret}` is used in the settings and the process is run as a service or in the background.
+> 当你使用`${prompt.text}` 或 `${prompt.secret}`时，Elasticsearch 此时就无法再作为后台服务来运行。
 
-## Index Settings
+## 索引配置
 
-Indices created within the cluster can provide their own settings. For example, the following creates an index with a refresh interval of 5 seconds instead of the default refresh interval (the format can be either YAML or JSON):
+在集群中创建索引时，也可以同时指定它们的配置信息。比如下面这个示例就展示了在创建索引时手动指定它的刷新间隔为 5 秒，而不使用默认值（参数格式也可以是 YAML 或 JSON）:
 
 ```bash
 $ curl -XPUT http://localhost:9200/kimchy/ -d \
@@ -195,12 +195,14 @@ index:
 '
 ```
 
-Index level settings can be set on the node level as well, for example, within the `elasticsearch.yml` file, the following can be set:
+索引级的配置信息也可以应用在节点级别上，比如可以在 `elasticsearch.yml` 文件中进行类似下面这样的配置：
 
 ```bash
 index :
     refresh_interval: 5s
 ```
+
+
 
 This means that every index that gets created on the specific node started with the mentioned configuration will use a refresh interval of 5 seconds `unless the index explicitly sets it`. In other words, any index level settings override what is set in the node configuration. Of course, the above can also be set as a "collapsed" setting, for example:
 
