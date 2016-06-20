@@ -6,102 +6,102 @@
 
 绝大多数情况下，`JAVA_OPTS`采用默认值就可以了，你可以使用`ES_JAVA_OPTS`环境变量来设置/改变 JVM 的设置或者参数。
 
-`ES_HEAP_SIZE`环境变量允许设置分配给 elasticsearch java 程序
+`ES_HEAP_SIZE`环境变量可以设置分配给 elasticsearch java 程序的堆内存。你也可以通过两个独立的环境变量来分开设置最大最小值（但并不推荐这么做），`ES_MIN_MEM`用来设置最小值（默认是`256m`），`ES_MAX_MEM`可以用来设置最大值（默认是`1g`）。
 
-The `ES_HEAP_SIZE` environment variable allows to set the heap memory that will be allocated to elasticsearch java process. It will allocate the same value to both min and max values, though those can be set explicitly (not recommended) by setting `ES_MIN_MEM` (defaults to `256m`), and `ES_MAX_MEM` (defaults to `1g`).
+推荐的做法是把最大最小值设置成相同大小，并打开 [mlockall](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration.html#setup-configuration-memory) 特性。
 
-It is recommended to set the min and max memory to the same value, and enable [mlockall](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration.html#setup-configuration-memory).
+## 系统配置
 
-## System Configuration
+### 文件描述符
 
-### File Descriptors
+不清楚文件描述符（file descriptors）是什么的，可以自行 wiki ([文件描述符 - 维基百科](https://zh.wikipedia.org/wiki/%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6))
 
-Make sure to increase the number of open files descriptors on the machine (or for the user running elasticsearch). Setting it to 32k or even 64k is recommended.
+机器在运行过程中，被打开的文件描述符会渐渐变多，要保证这个增量不会超限（也为了用户在运行 elasticsearch 过程中不出异常）推荐的做法是把它设置成 32k 或者甚至是 64k。
 
-In order to test how many open files the process can open, start it with `-Des.max-open-files` set to `true`. This will print the number of open files the process can open on startup.
+如果想要测试程序究竟能打开多少个文件的话，那就在启动时，把`-Des.max-open-files`设置成`true`就可以了。这样程序在启动的时候就会把打开的文件数打印出来。
 
-Alternatively, you can retrieve the `max_file_descriptors` for each node using the *[Nodes Info](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html)* API, with:
+另外你也可以使用 *[Nodes Info](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html)* API 来获取每个节点的 `max_file_descriptors` 值：
 
 ```bash
 curl localhost:9200/_nodes/stats/process?pretty
 ```
 
-### Virtual memory
+### 虚拟内存
 
-Elasticsearch uses a [hybrid mmapfs / niofs](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-store.html#default_fs) directory by default to store its indices. The default operating system limits on mmap counts is likely to be too low, which may result in out of memory exceptions. On Linux, you can increase the limits by running the following command as `root`:
+默认配置下，elasticsearch 使用一个 [混合了 mmapfs/noifs](https://www.gitbook.com/book/scsundefined/elasticsearch-reference-cn/edit#) 的目录在存储索引。操作系统默认的 mmap 上限值一般都很低，这可能会导致内存溢出。在 Linux 平台上，你可以以`root`权限来运行下面这段命令来增大上限值：
 
 ```bash
 sysctl -w vm.max_map_count=262144
 ```
 
-To set this value permanently, update the `vm.max_map_count` setting in `/etc/sysctl.conf`.
+如果要持久化这个配置，那你可以更新 `/etc/sysctl.conf` 这个配置文件中的 `vm.max_map_count` 值。
 
->**Note**
+> **注意**
 >
->If you installed Elasticsearch using a package (.deb, .rpm) this setting will be changed automatically. To verify, run `sysctl vm.max_map_count`.
+> 如果你是使用安装包来安装（.deb, .rpm）Elasticsrearch 的，那这个值会被自动优化。你可以运行`sysctl vm.max_map_count`命令来确认。
 
-### Memory Settings
+### 内存配置
 
-Most operating systems try to use as much memory as possible for file system caches and eagerly swap out unused application memory, possibly resulting in the elasticsearch process being swapped. Swapping is very bad for performance and for node stability, so it should be avoided at all costs.
+多数的操作系统就会尽可能地给文件系统缓存分配内存并积极地交换出未被使用的应用程序内存，这可能会导致 elasticsearch 会交换。这会对 elasticsearch 的性能以及节点的稳定性造成极其恶劣的影响，所以应该不惜一切代价地避免它。
 
-There are three options:
+有三种可选方案：
 
-* **Disable swap**
+* **禁用交换**
   
-  The simplest option is to completely disable swap. Usually Elasticsearch is the only service running on a box, and its memory usage is controlled by the `ES_HEAP_SIZE` environment variable. There should be no need to have swap enabled.
-
-  On Linux systems, you can disable swap temporarily by running: `sudo swapoff -a`. To disable it permanently, you will need to edit the `/etc/fstab` file and comment out any lines that contain the word `swap`.
-
-  On Windows, the equivalent can be achieved by disabling the paging file entirely via `System Properties → Advanced → Performance → Advanced → Virtual memory`.
-
-* **Configure `swappiness`**
-
-  The second option is to ensure that the sysctl value `vm.swappiness` is set to `0`. This reduces the kernel’s tendency to swap and should not lead to swapping under normal circumstances, while still allowing the whole system to swap in emergency conditions.
-
-> **Note**
-> 
-> From kernel version 3.5-rc1 and above, a swappiness of 0 will cause the OOM killer to kill the process instead of allowing swapping. You will need to set swappiness to 1 to still allow swapping in emergencies.
+  最简单粗暴的方法就是直接禁用掉交换。通常情况下，一个沙盒只专门用来运行 Elasticsearch，而它对内存的使用则是通过`ES_HEAP_SIZE`环境变量来控制的。所以也就应该不需要打开交换功能了。
+  
+  在 Linux 系统中，你可以运行 `sudo swapoff -a` 来临时性地关掉交换。如果要持久化这一配置则需要编辑 `/etc/fstab` 文件并注释掉所有包含 `swap` 单词的行。
+  
+  在 Windows 系统中，则可以通过禁用页文件来达到相同的目的，具体操作方式 `System Properties → Advanced → Performance → Advanced → Virtual memory`,即 控制面板 → 高级系统设置 → 高级 → 性能 设置 → 高级 → 虚拟内存 更改。
+  
+* **配置 `swappiness`**
+  
+  第二种做法是把 sysctl 值的 `vm.swappiness` 设置为 0 。这会减少操作系统内核执行交换的积极性从而导致正常情况下一般不会进行交换，但依然允许整个系统在紧急情况下进行交换。
+  
+> **注意**
+>
+> 从 3.5-rc1 内核版本开始，把 swappiness 值设置成 0 会导致 OOM killer 杀死允许交换的进程。你需要把 swappiness 设置成 1 来允许紧急情况下的交换。
 
 * **mlockall**
 
-  The third option is to use [mlockall](http://opengroup.org/onlinepubs/007908799/xsh/mlockall.html) on Linux/Unix systems, or [VirtualLock](https://msdn.microsoft.com/en-us/library/windows/desktop/aa366895%28v=vs.85%29.aspx) on Windows, to try to lock the process address space into RAM, preventing any Elasticsearch memory from being swapped out. This can be done, by adding this line to the `config/elasticsearch.yml` file:
+  第三种方式是使用 Linux/Unix 系统的 [mlockall](https://www.gitbook.com/book/scsundefined/elasticsearch-reference-cn/edit#) 或者 Windows 系统的 [VirtualLock](https://msdn.microsoft.com/en-us/library/windows/desktop/aa366895%28v=vs.85%29.aspx) 来试着将程序的地址空间锁在 RAM 中以防止任何 Elasticsearch 内存被换出。具体操作方式是在 `config/elasticsearch.yml` 文件中加上下面这一行代码：
 
   ```bash
   bootstrap.mlockall: true
   ```
 
-  After starting Elasticsearch, you can see whether this setting was applied successfully by checking the value of `mlockall` in the output from this request:
+  在启动完 Elasticsearch 后，你可以运行下面这段命令，然后看`mlockall`的值来确认这个设置是否已奏效：
 
   ```bash
   curl http://localhost:9200/_nodes/process?pretty
   ```
   
-  If you see that `mlockall` is `false`, then it means that the `mlockall` request has failed. The most probable reason, on Linux/Unix systems, is that the user running Elasticsearch doesn’t have permission to lock memory. This can be granted by running `ulimit -l unlimited` as `root` before starting Elasticsearch.
-
-  Another possible reason why `mlockall` can fail is that the temporary directory (usually `/tmp`) is mounted with the `noexec` option. This can be solved by specifying a new temp directory, by starting Elasticsearch with:
-
+  如果你看到 `mlockall` 的值是 `false`的话，这就意味着 `mlockall` 请求执行失败了。最普遍的原因是，在 Linux/Unix 操作系统中，运行 Elasticsearch 的用户并没有锁内存的权限。在启动 Elasticsearch 之前，先使用 `root` 权限运行 `ulimit -l unlimited` 命令就可以授予这个权限。
+  
+  另一种可能的原因是临时文件夹（通常是 `/tmp`）被设置了 `noexec` 选项。这个原因可以通过指定一个新的临时文件夹来解决：
+  
   ```bash
   ./bin/elasticsearch -Djna.tmpdir=/path/to/new/dir
   ```
   
-  > **Warning**
+  > **警告**
   > 
-  > mlockall might cause the JVM or shell session to exit if it tries to allocate more memory than is available!
+  > mlockall 可能会导致 JVM 或者 shell 会话在试图分配超出可用内存大小的内存时异常直接退出。
+  
+## Elasticsearch 配置
 
-## Elasticsearch Settings
+**elasticsearch** 的配置文件在 `ES_HOME/config` 文件夹下。这个文件夹里有两个文件，`elasticsearch.yml`，用来配置 Elasticsrearch 的各个[模块](https://www.gitbook.com/book/scsundefined/elasticsearch-reference-cn/edit#)，`logging.yml`，用来配置 Elasticsearch 的日志。
 
-**elasticsearch** configuration files can be found under `ES_HOME/config` folder. The folder comes with two files, the elasticsearch.yml for configuring Elasticsearch different [modules](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules.html), and `logging.yml` for configuring the Elasticsearch logging.
-
-The configuration format is [YAML](http://www.yaml.org/). Here is an example of changing the address all network based modules will use to bind and publish to:
+配置的形式是 [YAML](https://www.gitbook.com/book/scsundefined/elasticsearch-reference-cn/edit#)。下面是个简单的小示例，这改变了所有基于网络的模块用来绑定和发布的地址：
 
 ```bash
 network :
     host : 10.0.0.4
 ```
 
-### Paths
+### 路径
 
-In production use, you will almost certainly want to change paths for data and log files:
+在生产环境中使用的时候，你肯定会想要改变数据以及日志文件的存储路径：
 
 ```bash
 path:
@@ -109,36 +109,36 @@ path:
   data: /var/data/elasticsearch
 ```
 
-### Cluster name
+### 集群名
 
-Also, don’t forget to give your production cluster a name, which is used to discover and auto-join other nodes:
+同样的，不要忘记给你的集群设置集群名，这会被用来发现和自动关联其他节点：
 
 ```bash
 cluster:
   name: <NAME OF YOUR CLUSTER>
 ```
 
-Make sure that you don’t reuse the same cluster names in different environments, otherwise you might end up with nodes joining the wrong cluster. For instance you could use `logging-dev`, `logging-stage`, and `logging-prod` for the development, staging, and production clusters.
+确保你不会在不同的环境下重用你的集群名，否则你可能会发现你的节点最后竟加入到了错误的集群中。你可以使用 `logging-dev`, `logging-stage` 和 `logging-prod` 来命名开发环境，测试环境和生产环境下的集群。
 
-### Node name
+### 节点名
 
-You may also want to change the default node name for each node to something like the display hostname. By default Elasticsearch will randomly pick a Marvel character name from a list of around 3000 names when your node starts up.
+或许，你也会想要以其他一些东西来命名你的节点，比如主机名，而不采用默认的节点名。默认情况下，Elasticsearch 节点在启动时会随机从 3000 多名漫威角色的名字中挑选一个出来命名节点。
 
 ```bash
 node:
   name: <NAME OF YOUR NODE>
 ```
 
-The hostname of the machine is provided in the environment variable `HOSTNAME`. If on your machine you only run a single elasticsearch node for that cluster, you can set the node name to the hostname using the `${...}` notation:
+主机名可以通过 `HOSTNAME` 变量来指定。如果你单台物理设备上只运行一个 elasticsearch 节点，那你可以使用 `${...}` 语法来将主机名设置成节点名：
 
 ```bash
 node:
   name: ${HOSTNAME}
 ```
 
-Internally, all settings are collapsed into "namespaced" settings. For example, the above gets collapsed into `node.name`. This means that its easy to support other configuration formats, for example, [JSON](http://www.json.org/). If JSON is a preferred configuration format, simply rename the `elasticsearch.yml` file to `elasticsearch.json` and add:
+### 配置格式
 
-### Configuration styles
+在程序内部，所有的设置都被映射在相应的 `命名空间` 中。比如说上面那个配置项就被映射在 `node.name` 中。这也使得在更换配置格式的时候会非常的方便，比如，如果要以 [JSON](https://www.gitbook.com/book/scsundefined/elasticsearch-reference-cn/edit#) 格式来配置 Elasticsearch 的话，只要把 `elasticsearch.yml` 重命名成 `elasticsearch.json` 然后加上下面这段代码就行了：
 
 ```bash
 {
@@ -148,7 +148,7 @@ Internally, all settings are collapsed into "namespaced" settings. For example, 
 }
 ```
 
-It also means that its easy to provide the settings externally either using the `ES_JAVA_OPTS` or as parameters to the `elasticsearch` command, for example:
+这也同样也方便了在程序外部进行设置，比如使用 `ES_JAVA_OPTS` 环境变量或者通过传参给 `elasticsearch` 命令:
 
 ```bash
 $ elasticsearch -Des.network.host=10.0.0.4
