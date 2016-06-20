@@ -212,11 +212,10 @@ $ elasticsearch -Des.index.refresh_interval=5s
 
 ## 日志配置
 
-Elasticsearch 使用一个内部的日志提取和
+Elasticsearch 使用一个基于 [log4j](https://www.gitbook.com/book/scsundefined/elasticsearch-reference-cn/edit#) 并且是开箱即用的，内部日志提取和输出系统。它试图采用 [YAML](https://www.gitbook.com/book/scsundefined/elasticsearch-reference-cn/edit#) 格式来进行配置从而简化 log4j 的配置，配置文件是 `config/logging.yml`。它同样也支持 [JSON](https://www.gitbook.com/book/scsundefined/elasticsearch-reference-cn/edit#) 和 [properties](https://www.gitbook.com/book/scsundefined/elasticsearch-reference-cn/edit#) 格式。
+多个配置文件可以一起被加载，它们各自的配置信息会被合并，前提是这个配置文件的文件名以`logging.`开头并以任意一种被支持的后缀名结束（不管是`.yml`亦或是`.yaml`，`.json` 或 `.properties`）。日志部分包含 java 报名以及它们对应的日志级别，可能 `org.elasticsearch` 前缀会被省略。appender 部分包含日志的输出地。如果自定义地进行拓展以及更多关于被支持的 appender 都可以在 [log4j documentation](https://www.gitbook.com/book/scsundefined/elasticsearch-reference-cn/edit#) 中查阅得到。
 
-Elasticsearch uses an internal logging abstraction and comes, out of the box, with [log4j](http://logging.apache.org/log4j/1.2/). It tries to simplify log4j configuration by using [YAML](http://www.yaml.org/) to configure it, and the logging configuration file is `config/logging.yml`. The [JSON](http://en.wikipedia.org/wiki/JSON) and [properties](http://en.wikipedia.org/wiki/.properties) formats are also supported. Multiple configuration files can be loaded, in which case they will get merged, as long as they start with the `logging.` prefix and end with one of the supported suffixes (either `.yml`, `.yaml`, `.json` or `.properties`). The logger section contains the java packages and their corresponding log level, where it is possible to omit the `org.elasticsearch` prefix. The appender section contains the destinations for the logs. Extensive information on how to customize logging and all the supported appenders can be found on the [log4j documentation](http://logging.apache.org/log4j/1.2/manual.html).
-
-Additional Appenders and other logging classes provided by [log4j-extras](http://logging.apache.org/log4j/extras/) are also available, out of the box.
+其他的 appender 和日志级别在 [log4j-extras](https://www.gitbook.com/book/scsundefined/elasticsearch-reference-cn/edit#) 中都有，都是拆箱即用的。
 
 ### Deprecation logging
 
