@@ -212,6 +212,7 @@ $ elasticsearch -Des.index.refresh_interval=5s
 
 ## 日志配置
 
+Elasticsearch 使用一个内部的日志提取和
 
 Elasticsearch uses an internal logging abstraction and comes, out of the box, with [log4j](http://logging.apache.org/log4j/1.2/). It tries to simplify log4j configuration by using [YAML](http://www.yaml.org/) to configure it, and the logging configuration file is `config/logging.yml`. The [JSON](http://en.wikipedia.org/wiki/JSON) and [properties](http://en.wikipedia.org/wiki/.properties) formats are also supported. Multiple configuration files can be loaded, in which case they will get merged, as long as they start with the `logging.` prefix and end with one of the supported suffixes (either `.yml`, `.yaml`, `.json` or `.properties`). The logger section contains the java packages and their corresponding log level, where it is possible to omit the `org.elasticsearch` prefix. The appender section contains the destinations for the logs. Extensive information on how to customize logging and all the supported appenders can be found on the [log4j documentation](http://logging.apache.org/log4j/1.2/manual.html).
 
