@@ -16,7 +16,7 @@ Github:
 
 ***
 
-关键词：
+关键词 (sorted by a-z) :
 
 | en | cn |
 | -- | -- |
@@ -25,6 +25,7 @@ Github:
 | field | 字段 |
 | index | 索引 |
 | shard | 分片 |
+| stopwords | 停词 |
 | token | 标记 |
 | token filter | 标记过滤器 |
 | tokenizer | 分词器 |
