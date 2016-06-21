@@ -26,3 +26,4 @@ Github:
 | type | 类型 |
 | field | 字段 |
 | analyzer | 解析器 |
+| tokenizer | 分词器 |
