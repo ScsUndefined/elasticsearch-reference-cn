@@ -9,9 +9,9 @@
 | `tokenizer` | 合理的/登记过的 分词器名 |
 | `filter` | 合理的/登记过的 标记过滤器的名称列表，这一项是可选的 |
 | `char_filter` | 合理的/登记过的 字符过滤器的名称列表，这一项是可选的 |
-| `position_increment_gap` | An optional number of positions to increment between each value of a field using this analyzer. Defaults to 100. 100 was chosen because it prevents phrase queries with reasonably large slops (less than 100) from matching terms across field values. |
+| `position_increment_gap` | ~~没懂...~~ An optional number of positions to increment between each value of a field using this analyzer. Defaults to 100. 100 was chosen because it prevents phrase queries with reasonably large slops (less than 100) from matching terms across field values. |
 
-Here is an example:
+下面给出一个示例：
 
 ```bash
 index :
