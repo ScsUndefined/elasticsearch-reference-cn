@@ -16,11 +16,13 @@ Github:
 
 ***
 
+关键词：
+
 | en | cn |
 | -- | -- |
-| shield | 分片 |
+| shard | 分片 |
 | index | 索引 |
 | document | 文档  |
 | type | 类型 |
 | field | 字段 |
-
+| analyzer | 解析器 |
