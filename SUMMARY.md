@@ -46,7 +46,7 @@
        * [13.1.4 Stop Analyzer 停词解析器](s13/01_04_stop_analyzer.md)
        * [13.1.5 Keyword Analyzer 关键字解析器](s13/01_05_keyword_analyzer.md)
        * [13.1.6 Pattern Analyzer 正则解析器](s13/01_06_pattern_analyzer.md)
-       * 13.1.7 Language Analyzers 语言解析器
+       * [13.1.7 Language Analyzers 语言解析器](s13/01_07_language_analyzers.md)
        * 13.1.8 Snowball Analyzer 雪球解析器
        * 13.1.9 Custom Analyzer 自定义解析器
    * [13.2 Tokenizers 分词器](s13/02_tokenizers.md)
