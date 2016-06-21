@@ -7,7 +7,7 @@
 | 配置项名称 | 该配置项的作用 |
 | ------- | ----------- |
 | `stopwords` | 一个停顿符号的列表，用来初始化停顿过滤器。默认情况下这个列表是空的。更多信息在 [Stop Analyzer](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-stop-analyzer.html) 一文中。 |
-| `max_token_length` | 最大的分词数量The maximum token length. If a token is seen that exceeds this length then it is split at `max_token_length` intervals. Defaults to `255`. |
+| `max_token_length` | 最大的分词量。如果一段话将要被分割成大于最大分词量的子句，那系统只会把它分割成 `max_token_length` 个子句。该值默认是`255`。|
 
 ***
 
