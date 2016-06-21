@@ -48,7 +48,7 @@
        * [13.1.6 Pattern Analyzer 正则解析器](s13/01_06_pattern_analyzer.md)
        * [13.1.7 Language Analyzers](s13/01_07_language_analyzers.md)
        * 13.1.8 Snowball Analyzer
-       * 13.1.9 Custom Analyzer 自定义解析器
+       * [13.1.9 Custom Analyzer 自定义解析器](s13/01_09_custom_analyzer.md)
    * [13.2 Tokenizers 分词器](s13/02_tokenizers.md)
    * [13.3 Token Filters 标记过滤器](s13/03_token_filters.md)
    * [13.4 Character Filters 字符过滤器](s13/04_character_filters.md)
