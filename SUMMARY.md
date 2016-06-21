@@ -40,7 +40,7 @@
 * [12. Mapping](s12/00_mapping.md)
 * [13. Analysis 解析](s13/00_analysis.md)
    * [13.1 Analyzers 解析器](s13/01_analyzers.md)
-   * 13.2 Tokenizers 分词器
+   * [13.2 Tokenizers 分词器](s13/02_tokenizers.md)
    * 13.3 Token Filters 标记过滤器
    * 13.4 Character Filters 字符过滤器
 * [14. Modules](s14/00_modules.md)
