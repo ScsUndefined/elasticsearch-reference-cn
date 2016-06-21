@@ -69,7 +69,7 @@
        * 13.3.16 KStem Token Filter
        * 13.3.17 Snowball Token Filter
        * 13.3.18 Phonetic Token Filter
-       * [13.3.19 Synonym Token Filter](s13/03_19_synonym_token_filter.md)
+       * [13.3.19 Synonym Token Filter 同义词标记过滤器](s13/03_19_synonym_token_filter.md)
        * 13.3.20 Compound Word Token Filter
        * 13.3.21 Reverse Token Filter
        * 13.3.22 Elision Token Filter
