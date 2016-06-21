@@ -14,3 +14,13 @@ Github:
 
 当前翻译版本基于英文 v2.3 版本
 
+***
+
+| en | cn |
+| -- | -- |
+| shield | 分片 |
+| index | 索引 |
+| document | 文档  |
+| type | 类型 |
+| field | 字段 |
+
