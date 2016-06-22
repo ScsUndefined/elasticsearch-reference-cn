@@ -24,11 +24,13 @@ Github:
 | document | 文档  |
 | field | 字段 |
 | index | 索引 |
+| recall | 查全 |
 | shard | 分片 |
 | stopwords | 停词 |
 | token | 标记 |
 | token filter | 标记过滤器 |
 | tokenizer | 分词器 |
 | type | 类型 |
+
 
 
