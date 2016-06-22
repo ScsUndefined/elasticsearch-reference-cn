@@ -24,9 +24,10 @@ Github:
 | document | 文档  |
 | field | 字段 |
 | index | 索引 |
+| inverted index | 倒排索引 |
 | recall | 查全 |
 | shard | 分片 |
-| stopwords | 停词 |
+| stopwords | 无用词 |
 | token | 标记 |
 | token filter | 标记过滤器 |
 | tokenizer | 分词器 |
