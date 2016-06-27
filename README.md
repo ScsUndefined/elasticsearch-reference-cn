@@ -1,7 +1,5 @@
 # Elasticsearch 官方指南 
 
-temp
-
 英文原文：
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html) 
