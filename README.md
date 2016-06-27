@@ -1,4 +1,4 @@
-# Elasticsearch 官方指南 2
+# Elasticsearch 官方指南
 
 英文原文：
 
