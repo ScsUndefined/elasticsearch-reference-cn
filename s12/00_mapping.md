@@ -4,7 +4,7 @@ Mapping is the process of defining how a document, and the fields it contains, a
 
 * which string fields should be treated as full text fields.
 * which fields contain numbers, dates, or geolocations.
-* whether the values of all fields in the document should be indexed into the catch-all [`\_all`](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-all-field.html) field.
+* whether the values of all fields in the document should be indexed into the catch-all [`_all`](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-all-field.html) field.
 * the [format](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-date-format.html) of date values.
 * custom rules to control the mapping for [dynamically added fields](https://www.elastic.co/guide/en/elasticsearch/reference/current/dynamic-mapping.html).
 
@@ -16,7 +16,7 @@ Each mapping type has:
 
 * [Meta-fields](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-fields.html) 
 
-  Meta-fields are used to customize how a document’s metadata associated is treated. Examples of meta-fields include the document’s `[_index](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-index-field.html)`, `[_type](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-type-field.html)`, `[_id](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-id-field.html)`, and `[_source](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-source-field.html)` fields.
+  Meta-fields are used to customize how a document’s metadata associated is treated. Examples of meta-fields include the document’s [`_index`](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-index-field.html), [`_type`](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-type-field.html), [`_id`](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-id-field.html), and [`_source`](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-source-field.html) fields.
   
 * [Fields](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html) or *properties*
   
@@ -26,9 +26,9 @@ Each mapping type has:
 
 Each field has a data `type` which can be:
 
-* a simple type like `[string](https://www.elastic.co/guide/en/elasticsearch/reference/current/string.html)`, `[date](https://www.elastic.co/guide/en/elasticsearch/reference/current/date.html)`, `[long](https://www.elastic.co/guide/en/elasticsearch/reference/current/number.html)`, `[double](https://www.elastic.co/guide/en/elasticsearch/reference/current/number.html)`, `[boolean](https://www.elastic.co/guide/en/elasticsearch/reference/current/boolean.html)` or `[ip](https://www.elastic.co/guide/en/elasticsearch/reference/current/ip.html)`.
-* a type which supports the hierarchical nature of JSON such as `[object](https://www.elastic.co/guide/en/elasticsearch/reference/current/object.html)` or `[nested](https://www.elastic.co/guide/en/elasticsearch/reference/current/nested.html)`.
-* or a specialised type like `[geo_point](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html)`, `[geo_shape](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-shape.html)`, or `[completion](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html)`.
+* a simple type like [`string`](https://www.elastic.co/guide/en/elasticsearch/reference/current/string.html), [`date`](https://www.elastic.co/guide/en/elasticsearch/reference/current/date.html), [`long`](https://www.elastic.co/guide/en/elasticsearch/reference/current/number.html), [`double`](https://www.elastic.co/guide/en/elasticsearch/reference/current/number.html), [`boolean`](https://www.elastic.co/guide/en/elasticsearch/reference/current/boolean.html) or [`ip`](https://www.elastic.co/guide/en/elasticsearch/reference/current/ip.html).
+* a type which supports the hierarchical nature of JSON such as [`object`](https://www.elastic.co/guide/en/elasticsearch/reference/current/object.html) or [`nested`](https://www.elastic.co/guide/en/elasticsearch/reference/current/nested.html).
+* or a specialised type like [`geo_point`](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html), [`geo_shape`](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-shape.html), or [`completion`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html).
 
 It is often useful to index the same field in different ways for different purposes. For instance, a `string` field could be [indexed](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-index.html) as an `analyzed` field for full-text search, and as a `not_analyzed` field for sorting or aggregations. Alternatively, you could index a string field with the [`standard` analyzer](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-standard-analyzer.html), the `[english](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-lang-analyzer.html#english-analyzer)` analyzer, and the [`french` analyzer](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-lang-analyzer.html#french-analyzer).
 
@@ -59,7 +59,7 @@ Mapping types are used to group fields, but the fields in each mapping type are 
 * map to the *same field* internally,
 * and **must have the same mapping**.
 
-If a `title` field exists in both the `user` and `blogpost` mapping types, the `title` fields must have exactly the same mapping in each type. The only exceptions to this rule are the `[copy_to](https://www.elastic.co/guide/en/elasticsearch/reference/current/copy-to.html)`, `[dynamic](https://www.elastic.co/guide/en/elasticsearch/reference/current/dynamic.html)`, `[enabled](https://www.elastic.co/guide/en/elasticsearch/reference/current/enabled.html)`, `[ignore_above](https://www.elastic.co/guide/en/elasticsearch/reference/current/ignore-above.html)`, `[include_in_all](https://www.elastic.co/guide/en/elasticsearch/reference/current/include-in-all.html)`, and `[properties](https://www.elastic.co/guide/en/elasticsearch/reference/current/properties.html)` parameters, which may have different settings per field.
+If a `title` field exists in both the `user` and `blogpost` mapping types, the `title` fields must have exactly the same mapping in each type. The only exceptions to this rule are the [`copy_to`](https://www.elastic.co/guide/en/elasticsearch/reference/current/copy-to.html), [`dynamic`](https://www.elastic.co/guide/en/elasticsearch/reference/current/dynamic.html), [`enabled`](https://www.elastic.co/guide/en/elasticsearch/reference/current/enabled.html), [`ignore_above`](https://www.elastic.co/guide/en/elasticsearch/reference/current/ignore-above.html), [`include_in_all`](https://www.elastic.co/guide/en/elasticsearch/reference/current/include-in-all.html), and [`properties`](https://www.elastic.co/guide/en/elasticsearch/reference/current/properties.html) parameters, which may have different settings per field.
 
 Usually, fields with the same name also contain the same type of data, so having the same mapping is not a problem. When conflicts do arise, these can be solved by choosing more descriptive names, such as `user_title` and `blog_title`.
 
