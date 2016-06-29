@@ -96,23 +96,14 @@ PUT my_index ①
   }
 }
 ```
-VIEW IN SENSE 
+[VIEW IN SENSE](http://localhost:5601/app/sense/?load_from=https://www.elastic.co/guide/en/elasticsearch/reference/current/snippets/mapping/1.json) 
 
-①
-Create an index called my_index.
+① Create an index called `my_index`.
 
+②⑧ Add mapping types called `user` and `blogpost`.
+
+③ Disable the `_all` [meta field](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-fields.html) for the user mapping type.
  
+④⑨ Specify fields or *properties* in each mapping type.
 
-Add mapping types called user and blogpost.
-
-
-
-Disable the _all meta field for the user mapping type.
-
- 
-
-Specify fields or properties in each mapping type.
-
-      
-
-Specify the data type and mapping for each field.
+⑤⑥⑦⑩⑪⑫⑬ Specify the data `type` and mapping for each field.
