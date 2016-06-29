@@ -37,10 +37,10 @@
 * [9. cat APIs](s09/00_cat_apis.md)
 * [10. Cluster APIs](s10/00_cluster_apis.md)
 * [11. Query DSL](s11/00_query_dsl.md)
-* [12. Mapping](s12/00_mapping.md)
+* [12. Mapping](s12/00_mapping.md) 映射
   * 12.1 Field datatypes
   * 12.2 Meta-Fields
-  * 12.3 Mapping parameters Mapping 参数
+  * 12.3 Mapping parameters 映射的配置参数
     * 12.3.1 analyzer
     * 12.3.2 boost
     * 12.3.3 coerce
