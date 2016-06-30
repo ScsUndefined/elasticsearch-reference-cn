@@ -57,8 +57,8 @@ The parameters allowed in the URI are:
 | `size` | The number of hits to return. Defaults to `10`. |
 | `search_type` | The type of the search operation to perform. Can be `dfs_query_then_fetch`, `query_then_fetch`, `scan` [~~2.1.0~~][^1] or `count` [~~2.0.0-beta1~~][^2]. Defaults to `query_then_fetch`. [*See Search*](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-search-type.html) Type for more details on the different types of search that can be performed. |
 
-[^1] Deprecated in 2.1.0. Replaced by a regular scroll sorted by \_doc.
+[^1] Deprecated in 2.1.0. Replaced by a regular scroll sorted by `_doc`.
 
-[^2] Deprecated in 2.0.0-beta1. Replaced by size: 0.
+[^2] Deprecated in 2.0.0-beta1. Replaced by `size: 0`.
 
 
