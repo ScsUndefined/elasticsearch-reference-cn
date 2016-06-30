@@ -40,7 +40,7 @@
   * 11.1 Query and filter context
   * 11.2 Match All Query
   * 11.3 Full text queries
-  * 11.4 Term level queries
+  * 11.4 Term level queries Term 级查询
   * 11.5 Compound queries
   * 11.6 Joining queries
   * 11.7 Geo queries
