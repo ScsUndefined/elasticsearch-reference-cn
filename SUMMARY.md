@@ -32,7 +32,7 @@
 * [4. API Conventions](s04/00_api_conventions.md)
 * [5. Document APIs](s05/00_document_apis.md)
 * [6. Search APIs 查询 API](s06/00_search_apis.md)
-   * [6.1 Search](s06/01_search.md)
+   * [6.1 Search 查询](s06/01_search.md)
    * 6.2 URI Search
    * 6.3 Request Body Search
    * 6.4 Search Template
