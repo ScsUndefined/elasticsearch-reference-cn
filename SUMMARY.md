@@ -38,39 +38,39 @@
 * [10. Cluster APIs](s10/00_cluster_apis.md)
 * [11. Query DSL](s11/00_query_dsl.md)
 * [12. Mapping 映射](s12/00_mapping.md)
-  * 12.1 Field datatypes
-  * 12.2 Meta-Fields
-  * 12.3 Mapping parameters 映射的配置参数
-    * 12.3.1 analyzer
-    * 12.3.2 boost
-    * 12.3.3 coerce
-    * 12.3.4 copy_to
-    * 12.3.5 doc_values
-    * 12.3.6 dynamic
-    * 12.3.7 enabled
-    * 12.3.8 fielddata
-    * 12.3.9 format
-    * 12.3.10 geohash
-    * 12.3.11 geohash_precision
-    * 12.3.12 geohash_prefix
-    * 12.3.13 ignore_above
-    * 12.3.14 ignore_malformed
-    * 12.3.15 include_in_all
-    * 12.3.16 index
-    * 12.3.17 index_options
-    * 12.3.18 lat_lon
-    * 12.3.19 fields
-    * 12.3.20 norms
-    * 12.3.21 null_value
-    * 12.3.22 position_increment_gap
-    * 12.3.23 precision_step
-    * 12.3.24 properties
-    * 12.3.25 search_analyzer
-    * 12.3.26 similarity
-    * 12.3.27 store
-    * 12.3.28 term_vector
-  * Dynamic Mapping
-  * Transform
+   * 12.1 Field datatypes
+   * 12.2 Meta-Fields
+   * [12.3 Mapping parameters 映射的配置参数](s12/03_mapping_parameters.md)
+       * 12.3.1 analyzer
+       * 12.3.2 boost
+       * 12.3.3 coerce
+       * 12.3.4 copy_to
+       * 12.3.5 doc_values
+       * 12.3.6 dynamic
+       * 12.3.7 enabled
+       * 12.3.8 fielddata
+       * 12.3.9 format
+       * 12.3.10 geohash
+       * 12.3.11 geohash_precision
+       * 12.3.12 geohash_prefix
+       * 12.3.13 ignore_above
+       * 12.3.14 ignore_malformed
+       * 12.3.15 include_in_all
+       * 12.3.16 index
+       * 12.3.17 index_options
+       * 12.3.18 lat_lon
+       * 12.3.19 fields
+       * 12.3.20 norms
+       * 12.3.21 null_value
+       * 12.3.22 position_increment_gap
+       * 12.3.23 precision_step
+       * 12.3.24 properties
+       * 12.3.25 search_analyzer
+       * 12.3.26 similarity
+       * 12.3.27 store
+       * 12.3.28 term_vector
+   * Dynamic Mapping
+   * Transform
 * [13. Analysis 解析](s13/00_analysis.md)
    * [13.1 Analyzers 解析器](s13/01_analyzers.md)
        * [13.1.1 Standard Analyzer 标准解析器](s13/01_01_standard_analyzer.md)
