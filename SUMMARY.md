@@ -32,6 +32,20 @@
 * [4. API Conventions](s04/00_api_conventions.md)
 * [5. Document APIs](s05/00_document_apis.md)
 * [6. Search APIs 查询 API](s06/00_search_apis.md)
+  * 6.1 Search
+  * 6.2 URI Search
+  * 6.3 Request Body Search
+  * 6.4 Search Template
+  * 6.5 Search Shards API
+  * 6.6 Suggesters
+  * 6.7 Multi Search API
+  * 6.8 Count API
+  * 6.9 Search Exists API
+  * 7.0 Validate API
+  * 7.1 Explain API
+  * 7.2 Profile API
+  * 7.3 Percolator
+  * 7.4 Field stats API
 * [7. Aggregations](s07/00_aggregations.md)
 * [8. Indices APIs](s08/00_indices_apis.md)
 * [9. cat APIs](s09/00_cat_apis.md)
