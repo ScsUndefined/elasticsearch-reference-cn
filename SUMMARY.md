@@ -37,17 +37,17 @@
 * [9. cat APIs](s09/00_cat_apis.md)
 * [10. Cluster APIs](s10/00_cluster_apis.md)
 * [11. Query DSL 查询 DSL](s11/00_query_dsl.md)
-  * 11.1 Query and filter context
-  * 11.2 Match All Query
-  * 11.3 Full text queries
-  * 11.4 Term level queries Term 级查询
-  * 11.5 Compound queries
-  * 11.6 Joining queries
-  * 11.7 Geo queries
-  * 11.8 Specialized queries
-  * 11.9 Span queries
-  * 11.10 Minimum Should Match
-  * 11.11 Multi Term Query Rewrite
+   * 11.1 Query and filter context
+   * 11.2 Match All Query
+   * 11.3 Full text queries
+   * [11.4 Term level queries Term 级查询](s11/04_term_level_queries.md)
+   * 11.5 Compound queries
+   * 11.6 Joining queries
+   * 11.7 Geo queries
+   * 11.8 Specialized queries
+   * 11.9 Span queries
+   * 11.10 Minimum Should Match
+   * 11.11 Multi Term Query Rewrite
 * [12. Mapping 映射](s12/00_mapping.md)
    * 12.1 Field datatypes
    * 12.2 Meta-Fields
