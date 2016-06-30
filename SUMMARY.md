@@ -36,7 +36,7 @@
 * [8. Indices APIs](s08/00_indices_apis.md)
 * [9. cat APIs](s09/00_cat_apis.md)
 * [10. Cluster APIs](s10/00_cluster_apis.md)
-* [11. Query DSL](s11/00_query_dsl.md) 查询 DSL
+* [11. Query DSL 查询 DSL](s11/00_query_dsl.md)
   * 11.1 Query and filter context
   * 11.2 Match All Query
   * 11.3 Full text queries
