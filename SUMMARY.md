@@ -56,7 +56,7 @@
        * 12.3.13 ignore_above
        * 12.3.14 ignore_malformed
        * 12.3.15 include_in_all
-       * 12.3.16 index
+       * [12.3.16 index](s12/03_16_index.md)
        * 12.3.17 index_options
        * 12.3.18 lat_lon
        * 12.3.19 fields
