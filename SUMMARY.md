@@ -35,6 +35,25 @@
    * [6.1 Search 查询](s06/01_search.md)
    * [6.2 URI Search URI 型的查询方式](s06/02_uri_search.md)
    * [6.3 Request Body Search 查询体 型的查询方式](s06/03_request_body_search.md)
+     * 6.3.1 Query
+     * 6.3.2 From / Size
+     * 6.3.3 Sort
+     * 6.3.4 Source filtering
+     * 6.3.5 Fields
+     * 6.3.6 Script Fields
+     * 6.3.7 Field Data Fields
+     * 6.3.8 Post filter
+     * 6.3.9 Highlighting
+     * 6.3.10 Rescoring
+     * 6.3.11 Search Type
+     * 6.3.12 Scroll
+     * 6.3.13 Preference
+     * 6.3.14 Explain
+     * 6.3.15 Version
+     * 6.3.16 Index Boost
+     * 6.3.17 min_score
+     * 6.3.18 Named Queries
+     * 6.3.19 Inner hits
    * 6.4 Search Template
    * 6.5 Search Shards API
    * 6.6 Suggesters
