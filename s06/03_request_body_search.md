@@ -1,4 +1,4 @@
-# 6.3 Request Body Search 查询体型的请求方式
+# 6.3 Request Body Search 查询体 型的查询方式
 
 除了使用 URI 来发起一个查询请求，你也可以使用一个包含着 [Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html) 的 DSL 来进行查询，就像下面这样：
 
