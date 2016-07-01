@@ -33,8 +33,8 @@
 * [5. Document APIs](s05/00_document_apis.md)
 * [6. Search APIs 查询 API](s06/00_search_apis.md)
    * [6.1 Search 查询](s06/01_search.md)
-   * [6.2 URI Search URI 查询](s06/02_uri_search.md)
-   * [6.3 Request Body Search](s06/03_request_body_search.md)
+   * [6.2 URI Search URI 型的查询方式](s06/02_uri_search.md)
+   * [6.3 Request Body Search 查询体 型的查询方式](s06/03_request_body_search.md)
    * 6.4 Search Template
    * 6.5 Search Shards API
    * 6.6 Suggesters
