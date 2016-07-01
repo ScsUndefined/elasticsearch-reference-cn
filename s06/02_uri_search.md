@@ -33,7 +33,7 @@ $ curl -XGET 'http://localhost:9200/twitter/tweet/_search?q=user:kimchy'
 }
 ```
 
-## 可选参数
+## 配置参数
 
 通过 URI 查询的时候，可以传入以下参数：
 
