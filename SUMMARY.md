@@ -37,7 +37,7 @@
    * [6.3 Request Body Search 查询体 型的查询方式](s06/03_request_body_search.md)
        * [6.3.1 Query](s06/03_01_query.md)
        * [6.3.2 From / Size](s06/03_02_from__size.md)
-       * [6.3.3 Sort](s06/03_03_sort.md)
+       * [6.3.3 Sort 排序](s06/03_03_sort.md)
        * 6.3.4 Source filtering
        * 6.3.5 Fields
        * 6.3.6 Script Fields
