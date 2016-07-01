@@ -36,7 +36,7 @@
    * [6.2 URI Search URI 型的查询方式](s06/02_uri_search.md)
    * [6.3 Request Body Search 查询体 型的查询方式](s06/03_request_body_search.md)
        * [6.3.1 Query](s06/03_01_query.md)
-       * [6.3.2 From / Size](s06/03_02_from__size.md)
+       * [6.3.2 From / Size 分页查询](s06/03_02_from__size.md)
        * [6.3.3 Sort 排序](s06/03_03_sort.md)
        * 6.3.4 Source filtering
        * 6.3.5 Fields
