@@ -38,7 +38,7 @@
        * [6.3.1 Query query元素的使用](s06/03_01_query.md)
        * [6.3.2 From / Size 分页查询](s06/03_02_from__size.md)
        * [6.3.3 Sort 排序](s06/03_03_sort.md)
-       * [6.3.4 Source filtering](s06/03_04_source_filtering.md)
+       * [6.3.4 Source filtering 筛选所需的原始数据](s06/03_04_source_filtering.md)
        * 6.3.5 Fields
        * 6.3.6 Script Fields
        * 6.3.7 Field Data Fields
