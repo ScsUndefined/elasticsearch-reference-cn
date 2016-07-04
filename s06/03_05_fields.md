@@ -55,7 +55,6 @@
 
 ***
 
-
 > **WARNNING**
 > 
 > The `fields` parameter is about fields that are explicitly marked as stored in the mapping, which is off by default and generally not recommended. Use [source filtering](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html) instead to select subsets of the original source document to be returned.
