@@ -115,9 +115,9 @@ The `match_phrase` query analyzes the text and creates a `phrase` query out of t
 }
 ```
 
-A phrase query matches terms up to a configurable `slop` (which defaults to 0) in any order. Transposed terms have a slop of 2.
+一个 phrase 查询会根据一个可配置的 `slop` 的值（默认是 0 ）来匹配 term，并与顺序无关。被转置过的 term （Transposed terms） 的 `slop` 值为 2 。
 
-The `analyzer` can be set to control which analyzer will perform the analysis process on the text. It defaults to the field explicit mapping definition, or the default search analyzer, for example:
+`analyzer`参数用来指定查询过程中使用的解析器，如果不指明的话，就会采用默认的解析器，默认情况下会使用字段映射信息中指定的解析器，或者全局指定的查询解析器。下面是示例：
 
 ```bash
 {
@@ -132,7 +132,7 @@ The `analyzer` can be set to control which analyzer will perform the analysis pr
 
 ## match_phrase_prefix
 
-The `match_phrase_prefix` is the same as `match_phrase`, except that it allows for prefix matches on the last term in the text. For example:
+`match_phrase_prefix` 类似于 `match_phrase`，不同之处在于它允许对文本的最后一个 term 进行前缀匹配，举例：
 
 ```bash
 {
@@ -142,7 +142,168 @@ The `match_phrase_prefix` is the same as `match_phrase`, except that it allows f
 }
 ```
 
-It accepts the same parameters as the phrase type. In addition, it also accepts a `max_expansions` parameter (default `50`) that can control to how many prefixes the last term will be expanded. It is highly recommended to set it to an acceptable value to control the execution time of the query. For example:
+它接收一些可以作为 phrase 类型的参数。另外它也接收一个叫做 `max_expansions` 的参数（默认值是 `50`），该参数可以控制最后一个 term 会被扩展成多少个前缀。gang 真，强烈推荐你把它设置成一个可接受的值来控制查询操作的执行时间，示例代码如下：
+
+```bash
+{
+    "match_phrase_prefix" : {
+        "message" : {
+            "query" : "quick brown f",
+            "max_expansions" : 10
+        }
+    }
+}
+```
+
+> **重要特性**
+> 
+> `match_phrase_prefix` 查询灰常得易用，你可以轻而易举地使用该功能来达到`自动补全`的目的，但相对的，尽管通常情况下，这种查询方式的查询结果会很人满意，但有时候也会查出一些令人摸不着头脑的结果。
+>
+> 以 `quick brown f` 为例。这个查询就会在 `quick` 和 `brown` 之外再创建一个 phase 查询（即 term `quick` 必须存在，而且必须紧跟在 term `brown` 之后），然后它会在存储好的 term 字典里查找前 50 个以 `f` 开头的 term，把它们都加到 phrase 查询中。
+> 
+> 问题是用户可能想查找 `quick brown fox` 而 `fox` 又不在前 50 个里，所以用户想要找的就没找到，但其实这通常而言也不是什么问题，因为用户会接着输入，知道他们想要找的东西出现为止。
+>
+> 更好的有关 `自动补全` 的解决方案，参见 [completion suggester](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html)。
+
+***
+
+A family of match queries that accepts text/numerics/dates, analyzes them, and constructs a query. For example:
+
+```bash
+{
+    "match" : {
+        "message" : "this is a test"
+    }
+}
+```
+
+Note, message is the name of a field, you can substitute the name of any field (including `_all`) instead.
+
+There are three types of match query: boolean, phrase, and phrase_prefix:
+
+## boolean
+
+The default match query is of type boolean. It means that the text provided is analyzed and the analysis process constructs a boolean query from the provided text. The operator flag can be set to or or and to control the boolean clauses (defaults to or). The minimum number of optional should clauses to match can be set using the minimum_should_match parameter.
+
+The analyzer can be set to control which analyzer will perform the analysis process on the text. It defaults to the field explicit mapping definition, or the default search analyzer.
+
+The lenient parameter can be set to true to ignore exceptions caused by data-type mismatches, such as trying to query a numeric field with a text query string. Defaults to false.
+
+## Fuzziness
+
+fuzziness allows fuzzy matching based on the type of field being queried. See the section called “Fuzzinessedit” for allowed settings.
+
+The prefix_length and max_expansions can be set in this case to control the fuzzy process. If the fuzzy option is set the query will use `top_terms_blended_freqs_${max_expansions}` as its rewrite method the fuzzy_rewrite parameter allows to control how the query will get rewritten.
+
+Fuzzy transpositions (ab → ba) are allowed by default but can be disabled by setting fuzzy_transpositions to false.
+
+Here is an example when providing additional parameters (note the slight change in structure, message is the field name):
+
+```bash
+{
+    "match" : {
+        "message" : {
+            "query" : "this is a test",
+            "operator" : "and"
+        }
+    }
+}
+```
+
+## Zero terms query
+
+If the analyzer used removes all tokens in a query like a stop filter does, the default behavior is to match no documents at all. In order to change that the zero_terms_query option can be used, which accepts none (default) and all which corresponds to a match_all query.
+
+```bash
+{
+    "match" : {
+        "message" : {
+            "query" : "to be or not to be",
+            "operator" : "and",
+            "zero_terms_query": "all"
+        }
+    }
+}
+```
+
+## Cutoff frequency
+
+The match query supports a cutoff_frequency that allows specifying an absolute or relative document frequency where high frequency terms are moved into an optional subquery and are only scored if one of the low frequency (below the cutoff) terms in the case of an or operator or all of the low frequency terms in the case of an and operator match.
+
+This query allows handling stopwords dynamically at runtime, is domain independent and doesn’t require a stopword file. It prevents scoring / iterating high frequency terms and only takes the terms into account if a more significant / lower frequency term matches a document. Yet, if all of the query terms are above the given cutoff_frequency the query is automatically transformed into a pure conjunction (and) query to ensure fast execution.
+
+The cutoff_frequency can either be relative to the total number of documents if in the range [0..1) or absolute if greater or equal to 1.0.
+
+Here is an example showing a query composed of stopwords exclusively:
+
+```bash
+{
+    "match" : {
+        "message" : {
+            "query" : "to be or not to be",
+            "cutoff_frequency" : 0.001
+        }
+    }
+}
+```
+
+> **Important**
+> 
+> The cutoff_frequency option operates on a per-shard-level. This means that when trying it out on test indexes with low document numbers you should follow the advice in Relevance is broken.
+
+## phrase
+
+The match_phrase query analyzes the text and creates a phrase query out of the analyzed text. For example:
+
+```bash
+{
+    "match_phrase" : {
+        "message" : "this is a test"
+    }
+}
+```
+
+Since match_phrase is only a type of a match query, it can also be used in the following manner:
+
+```bash
+{
+    "match" : {
+        "message" : {
+            "query" : "this is a test",
+            "type" : "phrase"
+        }
+    }
+}
+```
+
+A phrase query matches terms up to a configurable slop (which defaults to 0) in any order. Transposed terms have a slop of 2.
+
+The analyzer can be set to control which analyzer will perform the analysis process on the text. It defaults to the field explicit mapping definition, or the default search analyzer, for example:
+
+```bash
+{
+    "match_phrase" : {
+        "message" : {
+            "query" : "this is a test",
+            "analyzer" : "my_analyzer"
+        }
+    }
+}
+```
+
+## match_phrase_prefix
+
+The match_phrase_prefix is the same as match_phrase, except that it allows for prefix matches on the last term in the text. For example:
+
+```bash
+{
+    "match_phrase_prefix" : {
+        "message" : "quick brown f"
+    }
+}
+```
+
+It accepts the same parameters as the phrase type. In addition, it also accepts a max_expansions parameter (default 50) that can control to how many prefixes the last term will be expanded. It is highly recommended to set it to an acceptable value to control the execution time of the query. For example:
 
 ```bash
 {
@@ -157,12 +318,12 @@ It accepts the same parameters as the phrase type. In addition, it also accepts 
 
 > **Important**
 > 
-> The `match_phrase_prefix` query is a poor-man’s autocomplete. It is very easy to use, which let’s you get started quickly with *search-as-you-type* but it’s results, which usually are good enough, can sometimes be confusing.
->
-> Consider the query string `quick brown f`. This query works by creating a phrase query out of `quick` and `brown` (i.e. the term `quick` must exist and must be followed by the term `brown`). Then it looks at the sorted term dictionary to find the first 50 terms that begin with `f`, and adds these terms to the phrase query.
->
-> The problem is that the first 50 terms may not include the term `fox` so the phase `quick brown fox` will not be found. This usually isn’t a problem as the user will continue to type more letters until the word they are looking for appears.
->
-> For better solutions for *search-as-you-type* see the [completion suggester](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html) and
+>  The match_phrase_prefix query is a poor-man’s autocomplete. It is very easy to use, which let’s you get started quickly with search-as-you-type but it’s results, which usually are good enough, can sometimes be confusing.
+> 
+> Consider the query string quick brown f. This query works by creating a phrase query out of quick and brown (i.e. the term quick must exist and must be followed by the term brown). Then it looks at the sorted term dictionary to find the first 50 terms that begin with f, and adds these terms to the phrase query.
+> 
+> The problem is that the first 50 terms may not include the term fox so the phase quick brown fox will not be found. This usually isn’t a problem as the user will continue to type more letters until the word they are looking for appears.
+> 
+> For better solutions for search-as-you-type see the completion suggester and
 
 
