@@ -72,7 +72,12 @@
 * [11. Query DSL 查询 DSL](s11/00_query_dsl.md)
    * [11.1 Query and filter context](s11/01_query_and_filter_context.md)
    * 11.2 Match All Query
-   * [11.3 Full text queries](s11/03_full_text_queries.md)
+   * [11.3 Full text queries 全文检索](s11/03_full_text_queries.md)
+     * Match Query
+     * Multi Match Query
+     * Common Terms Query
+     * Query String Query
+     * Simple Query String Query
    * [11.4 Term level queries Term 级查询](s11/04_term_level_queries.md)
    * 11.5 Compound queries
    * 11.6 Joining queries
