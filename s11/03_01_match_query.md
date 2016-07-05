@@ -47,6 +47,8 @@
 
 如果解析器移除了一个查询体中的所有词（就像`stop`过滤器就会删除查询文本中的它认为不重要的词），那就会导致最终没有查到任何相关的文档。为了改变这种状况，Elasticsearch 就提供了名为 `zero_terms_query` 配置项，它可以接收 `none`（这同时也是默认值） 或者 `all` （相当于 `match_all` 查询）
 
+~~没理解。。。~~
+
 ```bash
 {
     "match" : {
@@ -59,15 +61,17 @@
 }
 ```
 
-## Cutoff frequency
+## Cutoff frequency 基于频率进行截断
 
-The match query supports a `cutoff_frequency` that allows specifying an absolute or relative document frequency where high frequency terms are moved into an optional subquery and are only scored if one of the low frequency (below the cutoff) terms in the case of an `or` operator or all of the low frequency terms in the case of an `and` operator match.
+匹配查询允许你根据频率来进行截断处理，该特性通过 `cutoff_frequency` 参数来设置,你可以指定一个绝对的文档频数，也可以指定一个相对的文档频数，然后高于这个值的高频词就会被转移到一个子查询中单独处理，这个子查询的处理步骤是可选的。如果 operator 是 `or` ，那么只要有一个 term 的频数低于这个值，该文档就会计算相关度评分，如果是 `and`，那么只有当所有的 term 的出现频数都低于指定的值时，这个文档才会计算相关度评分。
 
-This query allows handling `stopwords` dynamically at runtime, is domain independent and doesn’t require a stopword file. It prevents scoring / iterating high frequency terms and only takes the terms into account if a more significant / lower frequency term matches a document. Yet, if all of the query terms are above the given `cutoff_frequency` the query is automatically transformed into a pure conjunction (`and`) query to ensure fast execution.
+~~不是很理解。。。~~
 
-The `cutoff_frequency` can either be relative to the total number of documents if in the range `[0..1)` or absolute if greater or equal to `1.0`.
+这个特性允许你在运行时动态地处理 `stopwords`（无用词），这是与领域无关的，也不需要一个无用词文件。该特性使得在计算相关度评分的时候可以忽略掉高频率出现的词汇而更专注于低频率的词（低频率通常也就意味着它更有意义）。当所有的查询 term 都高于指定的 `cutoff_frequency`，那这个查询就会被自动转换成一个单纯的联合查询（`and`），以保证查询动作能被快速执行。
 
-Here is an example showing a query composed of stopwords exclusively:
+`cutoff_frequency` 的值如果在 `[0, 1)` 范围内，则表示它是一个相对的值，相对于文档的总数。值如果在 `[1, +∞)`范围内，则表示它是一个绝对值。
+
+下面是一个用法示例：
 
 ```bash
 {
@@ -80,11 +84,13 @@ Here is an example showing a query composed of stopwords exclusively:
 }
 ```
 
-> **Important**
+> **重要提醒**
 > 
-> The `cutoff_frequency` option operates on a per-shard-level. This means that when trying it out on test indexes with low document numbers you should follow the advice in [Relevance is broken](https://www.elastic.co/guide/en/elasticsearch/guide/2.x/relevance-is-broken.html).
+> `cutoff_frequency` 选项是一个 per-shard 级别的操作。这也就是说如果你的测试索引文档数过少，就会导致相关度评分计算不准确。你应该遵循 [Relevance is broken](https://www.elastic.co/guide/en/elasticsearch/guide/2.x/relevance-is-broken.html) 一文中的相关建议。
 
-## phrase
+## phrase 专业术语查询
+
+`match_phrase` 查询会解析查询文本，然后在被解析的文本之外再创建一个 `phrase`，举例：
 
 The `match_phrase` query analyzes the text and creates a `phrase` query out of the analyzed text. For example:
 
@@ -96,7 +102,7 @@ The `match_phrase` query analyzes the text and creates a `phrase` query out of t
 }
 ```
 
-Since `match_phrase` is only a `type` of a `match` query, it can also be used in the following manner:
+尽管 `match_phrase` 只是 `match` 查询下的一种 `type` (类型), 但它其实还可以这么来用：
 
 ```bash
 {
