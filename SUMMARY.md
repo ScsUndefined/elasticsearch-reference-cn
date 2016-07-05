@@ -42,7 +42,7 @@
        * [6.3.5 Fields fields参数](s06/03_05_fields.md)
        * [6.3.6 Script Fields script参数](s06/03_06_script_fields.md)
        * [6.3.7 Field Data Fields fielddata_fields参数](s06/03_07_field_data_fields.md)
-       * 6.3.8 Post filter
+       * [6.3.8 Post filter](s06/03_08_post_filter.md)
        * 6.3.9 Highlighting
        * 6.3.10 Rescoring
        * 6.3.11 Search Type
