@@ -193,7 +193,7 @@ The lenient parameter can be set to true to ignore exceptions caused by data-typ
 
 fuzziness allows fuzzy matching based on the type of field being queried. See the section called “Fuzzinessedit” for allowed settings.
 
-The prefix_length and max_expansions can be set in this case to control the fuzzy process. If the fuzzy option is set the query will use `top_terms_blended_freqs_${max_expansions}` as its rewrite method the fuzzy_rewrite parameter allows to control how the query will get rewritten.
+The `prefix_length` and `max_expansions` can be set in this case to control the fuzzy process. If the fuzzy option is set the query will use `top_terms_blended_freqs_${max_expansions}` as its rewrite method the fuzzy_rewrite parameter allows to control how the query will get rewritten.
 
 Fuzzy transpositions (ab → ba) are allowed by default but can be disabled by setting fuzzy_transpositions to false.
 
@@ -293,7 +293,7 @@ The analyzer can be set to control which analyzer will perform the analysis proc
 
 ## match_phrase_prefix
 
-The match_phrase_prefix is the same as match_phrase, except that it allows for prefix matches on the last term in the text. For example:
+The `match_phrase_prefix` is the same as `match_phrase`, except that it allows for prefix matches on the last term in the text. For example:
 
 ```bash
 {
