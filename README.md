@@ -1,4 +1,4 @@
-# Elasticsearch 官方指南
+# Elasticsearch 官方指南(跳着翻译的)
 
 ** 最初翻译的时候难免会有些生涩，读不通顺的章节直接提 issue 我，我重新翻译 **
 
